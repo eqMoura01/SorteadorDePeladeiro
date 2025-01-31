@@ -25,8 +25,12 @@ jobs:
     - name: Build Solution
       run: msbuild SorteadorDePeladeiro.sln /p:Configuration=Release
 
+    - name: List files
+      run: |
+        dir /s *.exe
+        
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: SorteadorDePeladeiro
-        path: bin/Release/SorteadorDePeladeiro.exe
+        path: SorteadorDePeladeiro/bin/Release/SorteadorDePeladeiro.exe 

@@ -26,11 +26,16 @@ jobs:
       run: msbuild SorteadorDePeladeiro.sln /p:Configuration=Release
 
     - name: List files
+      shell: pwsh
       run: |
-        dir /s *.exe
+        Get-ChildItem -Path . -Recurse -Filter "*.exe"
+        Write-Host "Current directory structure:"
+        Get-ChildItem -Path . -Recurse | Select-Object FullName
         
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: SorteadorDePeladeiro
-        path: SorteadorDePeladeiro/bin/Release/SorteadorDePeladeiro.exe 
+        path: |
+          **/*.exe
+          !**/obj/**
